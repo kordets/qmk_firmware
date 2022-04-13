@@ -47,12 +47,17 @@ typedef struct {
     uint8_t up;
     uint8_t down;
     uint8_t click;
+    double vector_length;
+    double angle_rad;
+    int8_t raw_x;
+    int8_t raw_y;
 } pimoroni_data_t;
 
 void         pimoroni_trackball_device_init(void);
 void         pimoroni_trackball_set_rgbw(uint8_t red, uint8_t green, uint8_t blue, uint8_t white);
 int16_t      pimoroni_trackball_get_offsets(uint8_t negative_dir, uint8_t positive_dir, uint8_t scale);
-void         pimoroni_trackball_adapt_values(int8_t* mouse, int16_t* offset);
+int16_t      pimoroni_trackball_get_offsets2(int16_t *offsetX, int16_t *offsetY, uint8_t negative_dirX, uint8_t positive_dirX, uint8_t negative_dirY, uint8_t positive_dirY, uint8_t scale);
+void         pimoroni_trackball_adapt_values(int8_t* mouseX, int8_t* mouseY, int16_t* offsetX, int16_t* offsetY, pimoroni_data_t* data);
 uint16_t     pimoroni_trackball_get_cpi(void);
 void         pimoroni_trackball_set_cpi(uint16_t cpi);
 i2c_status_t read_pimoroni_trackball(pimoroni_data_t* data);
